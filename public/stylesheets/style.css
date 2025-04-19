@@ -1,8 +1,28 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 32px;
 }
 
-a {
-  color: #00B7FF;
+.home-content {
+  padding: 50px;
+}
+
+h1 {
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  font-size: 96px;
+}
+
+.black-text {
+  color: black;
+}
+
+.blue-bg {
+  background-color: #6090B2;
+}
+
+.yellow-border-container {
+  border: solid 10px #F6E5BC;
+  border-radius: 25px;
+  text-align: center;
 }
