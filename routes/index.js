@@ -49,16 +49,16 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Przetargi' });
 });
 
-router.get('/bids-list', (req, res) => {
-  res.render('./pages/bids-list');
+router.get('/tenders-list', (req, res) => {
+  res.render('./pages/tenders-list');
 });
 
-router.get('/finished-bids-list', (req, res) => {
-  res.render('./pages/finished-bids-list');
+router.get('/finished-tenders-list', (req, res) => {
+  res.render('./pages/finished-tenders-list');
 });
 
-router.get('/new-bid', (req, res) => {
-  res.render('./pages/new-bid');
+router.get('/new-tender', (req, res) => {
+  res.render('./pages/new-tender');
 });
 
 module.exports = router;

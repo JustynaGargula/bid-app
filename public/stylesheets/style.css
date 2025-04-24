@@ -3,14 +3,18 @@ body {
   font-size: 32px;
 }
 
-.home-content {
-  padding: 50px;
+.main-content {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 h1 {
   font-family: 'Roboto Condensed', sans-serif;
   text-align: center;
   font-size: 96px;
+  margin: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .black-text {
