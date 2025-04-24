@@ -9,21 +9,38 @@
     <%- include('../common/navbar') %>
     <div class="main-content">
         <h1>Dodanie przetargu</h1>
-        <div class="m-3 px-4 py-5 yellow-border-container">
-            <form>
+        <div class="yellow-border-container">
+            <form action="/" method="post">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1">
+                    <label for="name" class="form-label">Nazwa przedmiotu przetargu</label>
+                    <input type="text" class="form-control" id="name">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="company" class="form-label">Instytucja zamawiająca</label>
+                    <input type="text" class="form-control" id="company">
                 </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Opis przedmiotu przetargu</label>
+                    <input type="text" class="form-control" id="description">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="mb-3">
+                    <label for="tender-start-time" class="form-label">Data i godzina rozpoczęcia przetargu</label>
+                    <input type="datetime-local" class="form-control" id="tender-start-time">
+                </div>
+                <div class="mb-3">
+                    <label for="tender-finish-time" class="form-label">Data i godzina zakończenia przetargu</label>
+                    <input type="datetime-local" class="form-control" id="tender-finish-time">
+                </div>
+                <div class="mb-3">
+                    <label for="max_budget" class="form-label">Maksymalny budżet</label>
+                    <input type="number" class="form-control" id="max_budget">
+                </div>
+<!--                TODO: kolejne pola formularza + style odwzorować-->
+
+                <div class="centered-text">
+                    <button type="submit" class="btn submit-button">Opublikuj przetarg</button>
+                </div>
+
             </form>
         </div>
 

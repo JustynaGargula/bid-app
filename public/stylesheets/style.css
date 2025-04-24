@@ -25,8 +25,38 @@ h1 {
   background-color: #6090B2;
 }
 
+.centered-text {
+  text-align: center;
+}
+
 .yellow-border-container {
   border: solid 10px #F6E5BC;
   border-radius: 25px;
+  margin: 16px;
+  padding: 48px;
+}
+
+.form-control {
+  border: 5px #6090B2 solid;
+  border-radius: 15px;
+  height: 78px;
+  margin: 16px 0;
+}
+
+.form-label {
+  justify-content: left;
+}
+
+.submit-button {
+  border: 5px #6090B2 solid;
+  border-radius: 15px;
+  background-color: white;
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 32px;
+  margin: 48px 0 16px 0;
   text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #c6d0dc;
 }
