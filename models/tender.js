@@ -1,8 +1,8 @@
 
 class Tender {
-    constructor(id = null, name, company, description, tender_start_time, tender_finish_time, max_budget) {
+    constructor(tender_name, company, description, tender_start_time, tender_finish_time, max_budget, id = null) {
         this.id = id;
-        this.name = name;
+        this.tender_name = tender_name;
         this.company = company;
         this.description = description;
         this.tender_start_time = tender_start_time;
@@ -12,7 +12,7 @@ class Tender {
     }
     toArray() {
         return [
-            this.name,
+            this.tender_name,
             this.company,
             this.description,
             this.tender_start_time,

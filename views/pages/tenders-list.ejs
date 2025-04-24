@@ -9,7 +9,29 @@
     <%- include('../common/navbar') %>
     <div class="main-content">
         <h1>Aktualne przetargi</h1>
-
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Liczba porządkowa</th>
+                    <th scope="col">Nazwa przetargu</th>
+                    <th scope="col">Data i godzina rozpoczęcia zbierania ofert w przetargu</th>
+                    <th scope="col">Data i godzina zakończenia przyjmowania ofert w przetargu</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% if (data.length === 0) { %>
+                <p class="yellow-border-container">Brak aktualnych przetargów.</p>
+            <% } else { %>
+            <% data.forEach(row => { %>
+                <tr>
+                    <th scope="row"><%= row.id %></th>
+                    <td><a href="/tenders-list/<%= row.id %>"><%= row.tender_name %></a></td>
+                    <td><%= row.tender_start_time %></td>
+                    <td><%= row.tender_finish_time %></td>
+                </tr>
+            <% }); } %>
+            </tbody>
+        </table>
     </div>
     <%- include('../common/body-common') %>
     </body>

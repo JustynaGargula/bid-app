@@ -13,7 +13,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tenders-list', (req, res) => {
-  res.render('./pages/tenders-list');
+  databaseController.getTenders((err, rows) => {
+    if(err){
+      return res.status(500).send("Błąd pobierania danych");
+    } else {
+        res.render('./pages/tenders-list', {'data': rows});
+    }
+  })
 });
 
 router.get('/finished-tenders-list', (req, res) => {
@@ -26,15 +32,22 @@ router.get('/new-tender', (req, res) => {
 
 // handling database operations
 router.post('/save-tender', (req, res) => {
-  const {name, company, description, tender_start_time, tender_finish_time, max_budget} = req.body
-  let tender = new Tender(name, company, description, tender_start_time, tender_finish_time, max_budget)
+  const {tender_name, company, description, tender_start_time, tender_finish_time, max_budget} = req.body
+  let tender = new Tender(tender_name, company, description, tender_start_time, tender_finish_time, max_budget)
   databaseController.addTender(tender, (err) => {
     if(err){
       return res.status(500).send("Błąd dodawania danych");
     } else {
-      res.redirect("/");
+      res.redirect("/tenders-list");
+
     }
   })
 });
+
+router.get('/tenders-list/:id', (req, res) => {
+  const id = req.params.id;
+
+  res.render("./pages/tender-details");
+})
 
 module.exports = router;
