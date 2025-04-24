@@ -1,50 +1,13 @@
 var express = require('express');
 var router = express.Router();
-const sqlite3 = require('sqlite3');
+var databaseController = require('../controllers/database-controller')
+const Tender = require(("../models/Tender"))
 
-const db = new sqlite3.Database('../bid_database.db', (err) => {
-  if (err) {
-    console.error('Błąd połączenia z bazą danych:', err.message);
-  } else {
-    console.log('Połączono z bazą danych SQLite.');
-  }
-});
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS tenders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    company TEXT,
-    description TEXT,
-    tender_start_time DATETIME,
-    tender_finish_time DATETIME,
-    max_budget FLOAT
-  )
-`, (err) => {
-  if (err) {
-    console.error('Błąd tworzenia tabeli "tenders":', err.message);
-  } else {
-    console.log('Tabela "tenders" została utworzona lub już istnieje.');
-  }
-});
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS bids (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    tender_id INTEGER,
-    name TEXT,
-    bid_value FLOAT,
-    bid_time DATETIME
-  )
-`, (err) => {
-  if (err) {
-    console.error('Błąd tworzenia tabeli "bids":', err.message);
-  } else {
-    console.log('Tabela "bids" została utworzona lub już istnieje.');
-  }
-});
-
-/* GET home page. */
+// GET pages
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Przetargi' });
 });
@@ -59,6 +22,19 @@ router.get('/finished-tenders-list', (req, res) => {
 
 router.get('/new-tender', (req, res) => {
   res.render('./pages/new-tender');
+});
+
+// handling database operations
+router.post('/save-tender', (req, res) => {
+  const {name, company, description, tender_start_time, tender_finish_time, max_budget} = req.body
+  let tender = new Tender(name, company, description, tender_start_time, tender_finish_time, max_budget)
+  databaseController.addTender(tender, (err) => {
+    if(err){
+      return res.status(500).send("Błąd dodawania danych");
+    } else {
+      res.redirect("/");
+    }
+  })
 });
 
 module.exports = router;

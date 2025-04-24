@@ -10,32 +10,31 @@
     <div class="main-content">
         <h1>Dodanie przetargu</h1>
         <div class="yellow-border-container">
-            <form action="/" method="post">
+            <form action="/save-tender" method="POST">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nazwa przedmiotu przetargu</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="mb-3">
                     <label for="company" class="form-label">Instytucja zamawiająca</label>
-                    <input type="text" class="form-control" id="company">
+                    <input type="text" class="form-control" id="company" name="company">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Opis przedmiotu przetargu</label>
-                    <input type="text" class="form-control" id="description">
+                    <input type="text" class="form-control" id="description" name="description">
                 </div>
                 <div class="mb-3">
                     <label for="tender-start-time" class="form-label">Data i godzina rozpoczęcia przetargu</label>
-                    <input type="datetime-local" class="form-control" id="tender-start-time">
+                    <input type="datetime-local" class="form-control" id="tender-start-time" name="tender_start_time">
                 </div>
                 <div class="mb-3">
                     <label for="tender-finish-time" class="form-label">Data i godzina zakończenia przetargu</label>
-                    <input type="datetime-local" class="form-control" id="tender-finish-time">
+                    <input type="datetime-local" class="form-control" id="tender-finish-time" name="tender_finish_time">
                 </div>
                 <div class="mb-3">
                     <label for="max_budget" class="form-label">Maksymalny budżet</label>
-                    <input type="number" class="form-control" id="max_budget">
+                    <input type="number" class="form-control" id="max_budget" name="max_budget">
                 </div>
-<!--                TODO: kolejne pola formularza + style odwzorować-->
 
                 <div class="centered-text">
                     <button type="submit" class="btn submit-button">Opublikuj przetarg</button>
