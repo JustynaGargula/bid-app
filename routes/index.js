@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var databaseController = require('../controllers/database-controller')
 const Tender = require(("../models/Tender"))
+const data = require("bootstrap/js/src/dom/data");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -57,10 +58,21 @@ router.get('/tenders-list/:id', (req, res) => {
     if(err) {
       res.status(500).send("Błąd pobierania danych");
     } else {
-      res.render("./pages/tender-details", {data: row});
+      res.render("./pages/tender-details", {id: id, data: row, current_time: new Date(), finish_time: new Date(row.tender_finish_time) });
     }
   })
 
+})
+
+router.get('/tenders-list/:id/new-bid', (req, res) => {
+  const id = req.params.id
+  databaseController.getTenderDetails(id, (err, row) => {
+    if(err) {
+      res.status(500).send("Błąd pobierania danych");
+    } else {
+      res.render("./pages/new-bid", {id: id, data: row});
+    }
+  })
 })
 
 module.exports = router;

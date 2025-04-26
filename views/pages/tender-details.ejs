@@ -9,13 +9,15 @@
         <%- include('../common/navbar') %>
         <div class="main-content">
             <h1>Szczegóły przetargu</h1>
-            <div class="yellow-border-container">
-                <b><%= data.tender_name %></b>
-                <p>Instytucja zamawiająca: <%= data.company %></p>
-                <p><%= data.description %></p>
-                <p>Termin składania ofert: od <%= data.tender_start_time %> do <%= data.tender_finish_time %></p>
-            </div>
+            <%- include('../common/tender-details-div') %>
         </div>
+        <% if (finish_time > current_time) { %>
+            <div class="centered-text">
+                <button class="btn submit-button" onclick="window.location.href='/tenders-list/<%= id %>/new-bid';">Złóż ofertę</button>
+            </div>
+        <% } else {%>
+            <h1>Złożone oferty</h1>
+        <% } %>
         <%- include('../common/body-common') %>
     </body>
 </html>
