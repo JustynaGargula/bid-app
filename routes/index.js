@@ -23,7 +23,14 @@ router.get('/tenders-list', (req, res) => {
 });
 
 router.get('/finished-tenders-list', (req, res) => {
-  res.render('./pages/finished-tenders-list');
+  databaseController.getFinishedTenders((err, rows) => {
+    if(err) {
+      return res.status(500).send("Błąd pobierania danych")
+    } else {
+      res.render('./pages/finished-tenders-list', { data: rows});
+    }
+  })
+
 });
 
 router.get('/new-tender', (req, res) => {

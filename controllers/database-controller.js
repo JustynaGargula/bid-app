@@ -79,8 +79,22 @@ function getTenders(callback) {
     })
 }
 
+function getFinishedTenders(callback) {
+    const sql = 'SELECT id, tender_name, tender_finish_time FROM tenders WHERE tender_finish_time < datetime("now")'
+    db.all(sql, (err, rows) => {
+        if (err) {
+            console.error('Błąd pobierania danych:', err.message);
+            return callback(err, null);
+        } else {
+            console.log('Pobrano dane z tabeli.');
+            return callback(null, rows);
+        }
+    })
+}
+
 
 module.exports = {
     addTender,
-    getTenders
+    getTenders,
+    getFinishedTenders
 };
