@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var databaseController = require('../controllers/database-controller')
 const Tender = require(("../models/Tender"))
-const data = require("bootstrap/js/src/dom/data");
+const Bid = require("../models/bid");
 
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
@@ -40,7 +40,9 @@ router.get('/new-tender', (req, res) => {
 
 // handling database operations
 router.post('/save-tender', (req, res) => {
-  const {tender_name, company, description, tender_start_time, tender_finish_time, max_budget} = req.body
+  let {tender_name, company, description, tender_start_time, tender_finish_time, max_budget} = req.body
+  tender_start_time = tender_start_time.replace('T', ' ') + ':00';
+  tender_finish_time = tender_finish_time.replace('T', ' ') + ':00';
   let tender = new Tender(tender_name, company, description, tender_start_time, tender_finish_time, max_budget)
   databaseController.addTender(tender, (err) => {
     if(err){
@@ -71,6 +73,18 @@ router.get('/tenders-list/:id/new-bid', (req, res) => {
       res.status(500).send("Błąd pobierania danych");
     } else {
       res.render("./pages/new-bid", {id: id, data: row});
+    }
+  })
+})
+
+router.post('/save-bid', (req, res) => {
+  let {tender_id, bid_name, bid_value, bid_time} = req.body;
+  let bid = new Bid(tender_id, bid_name, bid_value, bid_time);
+  databaseController.saveBid(bid, (err) => {
+    if(err) {
+      res.status(500).send("Błąd zapisywania danych");
+    } else {
+      res.redirect("/tenders-list/"+tender_id)
     }
   })
 })

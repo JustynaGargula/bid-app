@@ -14,6 +14,7 @@
             <h1>Złóż ofertę</h1>
             <div class="yellow-border-container">
                 <form action="/save-bid" method="POST">
+                    <input type="hidden" name="tender_id" value="<%= id %>">
                     <div class="mb-3">
                         <label for="bid_name" class="form-label">Nazwa składającego ofertę</label>
                         <input type="text" class="form-control" id="bid_name" name="bid_name">
@@ -22,6 +23,8 @@
                         <label for="bid_value" class="form-label">Wartość oferty</label>
                         <input type="number" class="form-control" id="bid_value" name="bid_value">
                     </div>
+                    <input type="hidden" name="bid_time" value="<% new Date() %>">
+
                     <div class="centered-text">
                         <button class="btn submit-button" type="submit">Opublikuj ofertę</button>
                     </div>

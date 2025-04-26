@@ -10,7 +10,6 @@ class Bid {
 
     toArray() {
         return [
-            this.id,
             this.tender_id,
             this.bid_name,
             this.bid_value,

@@ -61,7 +61,7 @@ function addTender( tender, callback) {
             return callback(err);
         } else {
             console.log('Dodano dane do tabeli.');
-            return callback(null, tender);
+            return callback(null);
         }
     });
 }
@@ -105,10 +105,24 @@ function getTenderDetails(id, callback) {
     })
 }
 
+function saveBid(bid, callback) {
+    const sql = 'INSERT INTO bids (tender_id, bid_name, bid_value, bid_time) VALUES (?, ?, ?, ?)';
+    db.run(sql, bid.toArray(), (err) => {
+        if (err) {
+            console.error('Błąd zapisywania danych:', err.message);
+            return callback(err);
+        } else {
+            console.log('Zapisano dane do tabeli.');
+            return callback(null);
+        }
+    })
+}
+
 
 module.exports = {
     addTender,
     getTenders,
     getFinishedTenders,
-    getTenderDetails
+    getTenderDetails,
+    saveBid
 };
