@@ -67,7 +67,7 @@ function addTender( tender, callback) {
 }
 
 function getTenders(callback) {
-    const sql = 'SELECT id, tender_name, tender_start_time, tender_finish_time FROM tenders WHERE tender_finish_time > datetime("now") '
+    const sql = 'SELECT id, tender_name, tender_start_time, tender_finish_time FROM tenders WHERE tender_finish_time > datetime("now") ';
     db.all(sql, (err, rows) => {
         if (err) {
             console.error('Błąd pobierania danych:', err.message);
@@ -80,7 +80,7 @@ function getTenders(callback) {
 }
 
 function getFinishedTenders(callback) {
-    const sql = 'SELECT id, tender_name, tender_finish_time FROM tenders WHERE tender_finish_time < datetime("now")'
+    const sql = 'SELECT id, tender_name, tender_finish_time FROM tenders WHERE tender_finish_time < datetime("now")';
     db.all(sql, (err, rows) => {
         if (err) {
             console.error('Błąd pobierania danych:', err.message);
@@ -92,9 +92,23 @@ function getFinishedTenders(callback) {
     })
 }
 
+function getTenderDetails(id, callback) {
+    const  sql = 'SELECT tender_name, company, description, tender_start_time, tender_finish_time FROM tenders WHERE id == '+id;
+    db.get(sql, (err, row) => {
+        if(err ){
+            console.error('Błąd pobierania wiersza z tabeli:', err.message);
+            return callback(err, null);
+        } else {
+            console.log('Pobrano wiersz z tabeli.');
+            return callback(null, row)
+        }
+    })
+}
+
 
 module.exports = {
     addTender,
     getTenders,
-    getFinishedTenders
+    getFinishedTenders,
+    getTenderDetails
 };

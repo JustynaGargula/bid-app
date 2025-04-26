@@ -53,8 +53,14 @@ router.post('/save-tender', (req, res) => {
 
 router.get('/tenders-list/:id', (req, res) => {
   const id = req.params.id;
+  databaseController.getTenderDetails(id, (err, row) => {
+    if(err) {
+      res.status(500).send("Błąd pobierania danych");
+    } else {
+      res.render("./pages/tender-details", {data: row});
+    }
+  })
 
-  res.render("./pages/tender-details");
 })
 
 module.exports = router;
