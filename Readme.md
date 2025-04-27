@@ -3,6 +3,7 @@
 Strona główna:
 
 ![Strona główna - zrzut ekranu](./assets/HomePageScreenshot.png)
+*Tekst na stronie głównej został wygenerowany przez ChatGPT*
 
 ## Spis treści
 * [Opis projektu](#opis-projektu)
