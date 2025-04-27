@@ -60,10 +60,16 @@ router.get('/tenders-list/:id', (req, res) => {
     if(err) {
       res.status(500).send("Błąd pobierania danych");
     } else {
-      res.render("./pages/tender-details", {id: id, data: row, current_time: new Date(), finish_time: new Date(row.tender_finish_time) });
+      databaseController.getBids(id, (err, rows) => {
+        if(err) {
+          res.status(500).send("Błąd pobierania danych o ofertach");
+        } else {
+          res.render("./pages/tender-details", {id: id, data: row, current_time: new Date(), start_time: new Date(row.tender_start_time), finish_time: new Date(row.tender_finish_time), bids: rows });
+        }
+
+      });
     }
   })
-
 })
 
 router.get('/tenders-list/:id/new-bid', (req, res) => {

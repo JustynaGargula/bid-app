@@ -60,3 +60,10 @@ h1 {
 .submit-button:hover {
   background-color: #c6d0dc;
 }
+
+.blue-container {
+  border: 5px #6090B2 solid;
+  border-radius: 15px;
+  margin: 32px 0;
+  padding: 16px 48px;
+}

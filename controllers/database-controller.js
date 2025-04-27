@@ -118,11 +118,25 @@ function saveBid(bid, callback) {
     })
 }
 
+function getBids(tender_id, callback) {
+
+    const sql = 'SELECT bid_name, bid_value FROM bids WHERE tender_id == '+tender_id+' AND bid_value <= (SELECT max_budget FROM tenders WHERE id=='+tender_id+') ORDER BY bid_value';
+    db.all(sql, (err, rows) => {
+        if (err) {
+            console.error('Błąd pobierania danych:', err.message);
+            return callback(err, null);
+        } else {
+            console.log('Pobrano dane z tabeli.');
+            return callback(null, rows);
+        }
+    })
+}
 
 module.exports = {
     addTender,
     getTenders,
     getFinishedTenders,
     getTenderDetails,
-    saveBid
+    saveBid,
+    getBids
 };

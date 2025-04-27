@@ -10,14 +10,32 @@
         <div class="main-content">
             <h1>Szczegóły przetargu</h1>
             <%- include('../common/tender-details-div') %>
-        </div>
-        <% if (finish_time > current_time) { %>
+
+        <% if(start_time > current_time) {%>
+            <p class="m-3 mt-5"><b>Jeszcze nie można składać ofert dla tego przetargu.</b></p>
+        <% } else if (finish_time > current_time) { %>
             <div class="centered-text">
                 <button class="btn submit-button" onclick="window.location.href='/tenders-list/<%= id %>/new-bid';">Złóż ofertę</button>
             </div>
         <% } else {%>
-            <h1>Złożone oferty</h1>
+            <% if(bids.length === 0) {%>
+                <div class="yellow-border-container">
+                    <p><b>Przetarg zakończono bez rozstrzygnięcia</b></p>
+                </div>
+            <% } else {%>
+                <h1>Złożone oferty (w budżecie)</h1>
+                <div class="yellow-border-container">
+                    <% bids.forEach( bid => { %>
+                        <div class="blue-container">
+                            <p><%= bid.bid_name %>: <%= bid.bid_value %></p>
+                        </div>
+                    <% })  %>
+                </div>
+            <% } %>
+
         <% } %>
+
+        </div>
         <%- include('../common/body-common') %>
     </body>
 </html>
