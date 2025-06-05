@@ -64,7 +64,11 @@ router.get('/tenders-list/:id', (req, res) => {
         if(err) {
           res.status(500).send("Błąd pobierania danych o ofertach");
         } else {
-          res.render("./pages/tender-details", {id: id, data: row, current_time: new Date(), start_time: new Date(row.tender_start_time), finish_time: new Date(row.tender_finish_time), bids: rows });
+          try {
+            res.render("./pages/tender-details", {id: id, data: row, current_time: new Date(), start_time: new Date(row.tender_start_time), finish_time: new Date(row.tender_finish_time), bids: rows });
+          } catch (error) {
+            res.status(500).send("Błąd renderowania danych przetargu.")
+          }
         }
 
       });
